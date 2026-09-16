@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>DuckDB Playground</title>
 
+    <!-- PyScript لوکال -->
     <link rel="stylesheet" href="./pyscript/core.css" />
     <script type="module" src="./pyscript/core.js"></script>
 
@@ -21,202 +22,120 @@
             text-align: left;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
+        .container { max-width: 1000px; margin: 0 auto; }
 
-        header {
-            margin-bottom: 24px;
-        }
-
+        header { margin-bottom: 24px; }
         header h1 {
-            font-size: 1.6rem;
-            font-weight: 600;
-            color: #f1f5f9;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 1.6rem; font-weight: 600; color: #f1f5f9;
+            display: flex; align-items: center; gap: 10px;
         }
-
         header h1 .dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: #fbbf24;
-            box-shadow: 0 0 12px #fbbf24;
+            width: 10px; height: 10px; border-radius: 50%;
+            background: #fbbf24; box-shadow: 0 0 12px #fbbf24;
         }
-
-        header p {
-            margin-top: 6px;
-            color: #94a3b8;
-            font-size: 0.9rem;
-        }
+        header p { margin-top: 6px; color: #94a3b8; font-size: 0.9rem; }
 
         .editor {
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 12px;
-            overflow: hidden;
+            background: #1e293b; border: 1px solid #334155;
+            border-radius: 12px; overflow: hidden;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .editor-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 16px;
-            background: #1a2332;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 12px 16px; background: #1a2332;
             border-bottom: 1px solid #334155;
         }
-
         .editor-header .label {
-            font-size: 0.8rem;
-            color: #94a3b8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
+            font-size: 0.8rem; color: #94a3b8;
+            text-transform: uppercase; letter-spacing: 1px; font-weight: 600;
         }
-
-        .dots {
-            display: flex;
-            gap: 6px;
-        }
-
-        .dots span {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
+        .dots { display: flex; gap: 6px; }
+        .dots span { width: 12px; height: 12px; border-radius: 50%; }
         .dots span:nth-child(1) { background: #ef4444; }
         .dots span:nth-child(2) { background: #fbbf24; }
         .dots span:nth-child(3) { background: #22c55e; }
 
         textarea {
-            width: 100%;
-            min-height: 140px;
-            background: #0f172a;
-            color: #7dd3fc;
-            border: none;
-            padding: 16px;
+            width: 100%; min-height: 180px;
+            background: #0f172a; color: #7dd3fc;
+            border: none; padding: 16px;
             font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
-            font-size: 14px;
-            line-height: 1.6;
-            resize: vertical;
-            outline: none;
-            direction: ltr;
-            text-align: left;
+            font-size: 14px; line-height: 1.6;
+            resize: vertical; outline: none;
+            direction: ltr; text-align: left;
         }
-
-        textarea::placeholder {
-            color: #475569;
-        }
+        textarea::placeholder { color: #475569; }
 
         .toolbar {
-            display: flex;
-            gap: 10px;
-            padding: 12px 16px;
-            background: #1a2332;
-            border-top: 1px solid #334155;
+            display: flex; gap: 10px;
+            padding: 12px 16px; background: #1a2332;
+            border-top: 1px solid #334155; align-items: center;
         }
 
         button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: inherit;
+            padding: 10px 20px; border: none; border-radius: 8px;
+            font-size: 0.9rem; font-weight: 600; cursor: pointer;
+            transition: all 0.2s ease; font-family: inherit;
         }
-
-        #run-btn {
-            background: #fbbf24;
-            color: #0f172a;
-        }
-
-        #run-btn:hover {
-            background: #f59e0b;
-            transform: translateY(-1px);
-        }
-
+        #run-btn { background: #fbbf24; color: #0f172a; }
+        #run-btn:hover { background: #f59e0b; transform: translateY(-1px); }
         #clear-btn {
-            background: transparent;
-            color: #94a3b8;
+            background: transparent; color: #94a3b8;
             border: 1px solid #334155;
         }
+        #clear-btn:hover { background: #334155; color: #e2e8f0; }
 
-        #clear-btn:hover {
-            background: #334155;
-            color: #e2e8f0;
-        }
-
-        .output-wrapper {
-            margin-top: 24px;
-        }
-
+        .output-wrapper { margin-top: 24px; }
         .output-label {
-            font-size: 0.8rem;
-            color: #94a3b8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 0.8rem; color: #94a3b8;
+            text-transform: uppercase; letter-spacing: 1px;
+            font-weight: 600; margin-bottom: 8px;
+            display: flex; align-items: center; justify-content: space-between;
         }
+        .status { font-size: 0.75rem; color: #64748b; text-transform: none; letter-spacing: 0; }
+        .status.ok { color: #86efac; }
+        .status.err { color: #fca5a5; }
 
         #output {
-            background: #1e293b;
-            border: 1px solid #334155;
-            border-radius: 12px;
-            padding: 16px;
+            background: #1e293b; border: 1px solid #334155;
+            border-radius: 12px; padding: 16px;
             font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
-            font-size: 13px;
-            color: #86efac;
-            white-space: pre-wrap;
-            word-break: break-word;
-            min-height: 60px;
-            direction: ltr;
-            text-align: left;
+            font-size: 13px; color: #86efac;
+            white-space: pre-wrap; word-break: break-word;
+            min-height: 60px; direction: ltr; text-align: left;
             overflow-x: auto;
         }
+        #output.error { color: #fca5a5; }
 
-        #output.error {
-            color: #fca5a5;
+        .table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid #334155; }
+        table {
+            width: 100%; border-collapse: collapse;
+            font-size: 13px; background: #1e293b;
         }
+        thead th {
+            background: #1a2332; color: #fbbf24;
+            text-align: left; padding: 10px 14px;
+            font-weight: 600; border-bottom: 2px solid #334155;
+            white-space: nowrap;
+        }
+        tbody td {
+            padding: 8px 14px; color: #e2e8f0;
+            border-bottom: 1px solid #263447;
+            font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+            white-space: nowrap;
+        }
+        tbody tr:hover { background: #263447; }
+        tbody tr:last-child td { border-bottom: none; }
 
         .hint {
-            margin-top: 16px;
-            font-size: 0.8rem;
-            color: #64748b;
-            line-height: 1.6;
+            margin-top: 16px; font-size: 0.8rem;
+            color: #64748b; line-height: 1.6;
         }
-
         .hint code {
-            background: #1e293b;
-            padding: 2px 6px;
-            border-radius: 4px;
-            color: #7dd3fc;
-            font-family: monospace;
+            background: #1e293b; padding: 2px 6px;
+            border-radius: 4px; color: #7dd3fc; font-family: monospace;
         }
-
-        .loading {
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            border: 2px solid #fbbf24;
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-            vertical-align: middle;
-            margin-right: 6px;
-        }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
@@ -228,16 +147,23 @@
 
         <div class="editor">
             <div class="editor-header">
-                <div class="dots">
-                    <span></span><span></span><span></span>
-                </div>
+                <div class="dots"><span></span><span></span><span></span></div>
                 <div class="label">query.sql</div>
             </div>
 
-            <textarea id="sql-input" spellcheck="false" placeholder="SELECT 'Hello DuckDB!' AS message;">SELECT
-    'Hello DuckDB!' AS message,
-    42 AS answer,
-    version() AS engine;</textarea>
+            <textarea id="sql-input" spellcheck="false">CREATE TABLE students (
+    id INTEGER,
+    name VARCHAR,
+    grade INTEGER
+);
+
+INSERT INTO students VALUES
+    (1, 'Ali', 18),
+    (2, 'Sara', 20),
+    (3, 'Reza', 15),
+    (4, 'Mina', 19);
+
+SELECT * FROM students ORDER BY grade DESC;</textarea>
 
             <div class="toolbar">
                 <button id="run-btn">▶  Run Query</button>
@@ -246,50 +172,132 @@
         </div>
 
         <div class="output-wrapper">
-            <div class="output-label">Result</div>
-            <div id="output">Ready.</div>
+            <div class="output-label">
+                <span>Result</span>
+                <span id="status" class="status">Loading Python engine…</span>
+            </div>
+            <div id="output">Please wait while the Python environment loads…</div>
         </div>
 
         <div class="hint">
-            💡 Try: <code>SELECT * FROM range(5);</code> or
-            <code>SELECT 1+1 AS sum;</code> — all queries run locally in your browser.
+            💡 Separate statements with <code>;</code> — e.g. <code>CREATE TABLE</code>, <code>INSERT</code>, then <code>SELECT</code>.
         </div>
     </div>
 
-    <script type="py" config='{"packages":["duckdb"], "pyodide_url":"./pyscript/pyodide/pyodide.js"}'>
+    <!-- PyScript با Pyodide لوکال + نصب آفلاین DuckDB -->
+    <script type="py" config='{"pyodide_url":"./pyscript/pyodide/pyodide.js"}'>
         import duckdb
+        import micropip
+        import asyncio
         from pyscript import document, when
+
+        # آخرین نتیجه (برای جدول)
+        last_result = {"columns": [], "rows": []}
+
+        def set_status(msg, kind=""):
+            status = document.getElementById("status")
+            status.innerText = msg
+            status.className = "status " + kind
+
+        # ─── نصب آفلاین DuckDB از فایل wheel محلی ───
+        async def install_duckdb():
+            try:
+                await micropip.install(
+                    "./pyscript/pyodide/duckdb-1.5.1-cp314-cp314-pyemscripten_2026_0_wasm32.whl"
+                )
+                set_status("Ready.", "ok")
+                document.getElementById("output").innerText = "Python engine loaded. Run a query!"
+            except Exception as e:
+                set_status("Failed to load engine", "err")
+                document.getElementById("output").classList.add("error")
+                document.getElementById("output").innerText = f"Error loading DuckDB: {e}"
+
+        def split_statements(sql):
+            """تقسیم کوئری به دستورهای جدا با احترام به نقل‌قول‌ها"""
+            stmts, current, in_quote, quote_char = [], [], False, ""
+            for ch in sql:
+                if ch in ("'", '"') and not in_quote:
+                    in_quote, quote_char = True, ch
+                elif ch == quote_char and in_quote:
+                    in_quote, quote_char = False, ""
+                if ch == ";" and not in_quote:
+                    s = "".join(current).strip()
+                    if s:
+                        stmts.append(s)
+                    current = []
+                else:
+                    current.append(ch)
+            s = "".join(current).strip()
+            if s:
+                stmts.append(s)
+            return stmts
+
+        def render_table(columns, rows):
+            """ساخت جدول HTML از نتیجه"""
+            html = ['<div class="table-wrap"><table><thead><tr>']
+            for col in columns:
+                html.append(f"<th>{col}</th>")
+            html.append("</tr></thead><tbody>")
+            for row in rows:
+                html.append("<tr>")
+                for cell in row:
+                    val = "" if cell is None else str(cell)
+                    html.append(f"<td>{val}</td>")
+                html.append("</tr>")
+            html.append("</tbody></table></div>")
+            return "".join(html)
 
         @when("click", "#run-btn")
         def run_query(event):
-            query = document.getElementById("sql-input").value.strip()
-            output = document.getElementById("output")
+            global last_result
 
-            if not query:
-                output.classList.add("error")
+            sql = document.getElementById("sql-input").value.strip()
+            output = document.getElementById("output")
+            output.classList.remove("error")
+
+            if not sql:
                 output.innerText = "Please enter a query."
+                output.classList.add("error")
+                set_status("Empty query", "err")
                 return
 
-            output.classList.remove("error")
-            output.innerText = "Running..."
+            set_status("Running...", "")
 
             try:
-                result = duckdb.sql(query).fetchall()
-                if not result:
-                    output.innerText = "Query executed successfully. (no rows returned)"
+                statements = split_statements(sql)
+                last_rows, last_cols = [], []
+
+                for stmt in statements:
+                    result = duckdb.sql(stmt)
+                    if result is not None and result.columns:
+                        cols = result.columns
+                        rows = result.fetchall()
+                        last_cols, last_rows = list(cols), [list(r) for r in rows]
+
+                if last_cols:
+                    last_result = {"columns": last_cols, "rows": last_rows}
+                    output.innerHTML = render_table(last_cols, last_rows)
+                    set_status(f"OK — {len(last_rows)} row(s)", "ok")
                 else:
-                    lines = []
-                    for row in result:
-                        lines.append(str(row))
-                    output.innerText = "\n".join(lines)
+                    output.innerText = "Statements executed successfully. (no result set)"
+                    last_result = {"columns": [], "rows": []}
+                    set_status("OK — no rows", "ok")
+
             except Exception as e:
                 output.classList.add("error")
                 output.innerText = f"Error: {e}"
+                set_status("Error", "err")
 
         @when("click", "#clear-btn")
         def clear_output(event):
-            document.getElementById("output").innerText = ""
+            global last_result
+            document.getElementById("output").innerHTML = "Cleared."
             document.getElementById("output").classList.remove("error")
+            last_result = {"columns": [], "rows": []}
+            set_status("Ready.", "")
+
+        # ─── فراخوانی نصب هنگام بارگذاری ───
+        asyncio.ensure_future(install_duckdb())
     </script>
 </body>
 </html>
