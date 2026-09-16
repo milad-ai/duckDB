@@ -184,8 +184,8 @@ SELECT * FROM students ORDER BY grade DESC;</textarea>
         </div>
     </div>
 
-    <!-- PyScript با Pyodide لوکال + نصب DuckDB از CDN داخلی Pyodide -->
-    <script type="py" config='{"packages":["duckdb"], "pyodide_url":"./pyscript/pyodide/pyodide.js"}'>
+    <!-- PyScript با Pyodide لوکال + نصب micropip و duckdb از CDN داخلی Pyodide -->
+    <script type="py" config='{"packages":["micropip","duckdb"], "pyodide_url":"./pyscript/pyodide/pyodide.js"}'>
         import duckdb
         import micropip
         import asyncio
@@ -198,17 +198,6 @@ SELECT * FROM students ORDER BY grade DESC;</textarea>
             status = document.getElementById("status")
             status.innerText = msg
             status.className = "status " + kind
-
-        # ─── نصب DuckDB از CDN داخلی Pyodide ───
-        async def install_duckdb():
-            try:
-                await micropip.install("duckdb")
-                set_status("Ready.", "ok")
-                document.getElementById("output").innerText = "Python engine loaded. Run a query!"
-            except Exception as e:
-                set_status("Failed to load engine", "err")
-                document.getElementById("output").classList.add("error")
-                document.getElementById("output").innerText = f"Error loading DuckDB: {e}"
 
         def split_statements(sql):
             """تقسیم کوئری به دستورهای جدا با احترام به نقل‌قول‌ها"""
@@ -294,8 +283,9 @@ SELECT * FROM students ORDER BY grade DESC;</textarea>
             last_result = {"columns": [], "rows": []}
             set_status("Ready.", "")
 
-        # ─── فراخوانی نصب هنگام بارگذاری ───
-        asyncio.ensure_future(install_duckdb())
+        # ─── به‌روزرسانی وضعیت پس از لود شدن کامل ───
+        set_status("Ready.", "ok")
+        document.getElementById("output").innerText = "Python engine loaded. Run a query!"
     </script>
 </body>
 </html>
