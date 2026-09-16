@@ -184,8 +184,8 @@ SELECT * FROM students ORDER BY grade DESC;</textarea>
         </div>
     </div>
 
-    <!-- PyScript با Pyodide لوکال + نصب آفلاین DuckDB -->
-    <script type="py" config='{"pyodide_url":"./pyscript/pyodide/pyodide.js"}'>
+    <!-- PyScript با Pyodide لوکال + نصب DuckDB از CDN داخلی Pyodide -->
+    <script type="py" config='{"packages":["duckdb"], "pyodide_url":"./pyscript/pyodide/pyodide.js"}'>
         import duckdb
         import micropip
         import asyncio
@@ -199,12 +199,10 @@ SELECT * FROM students ORDER BY grade DESC;</textarea>
             status.innerText = msg
             status.className = "status " + kind
 
-        # ─── نصب آفلاین DuckDB از فایل wheel محلی ───
+        # ─── نصب DuckDB از CDN داخلی Pyodide ───
         async def install_duckdb():
             try:
-                await micropip.install(
-                    "./pyscript/pyodide/duckdb-1.5.1-cp314-cp314-pyemscripten_2026_0_wasm32.whl"
-                )
+                await micropip.install("duckdb")
                 set_status("Ready.", "ok")
                 document.getElementById("output").innerText = "Python engine loaded. Run a query!"
             except Exception as e:
